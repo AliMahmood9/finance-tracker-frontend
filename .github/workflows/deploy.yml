@@ -18,18 +18,18 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Install pnpm
-        run: npm install -g pnpm
+      - name: Install npm
+        run: npm install
 
       - name: Install dependencies
-        run: pnpm install
+        run: npm install
 
       - name: Create env file
         run: |
           echo "VITE_API_URL=${{ secrets.VITE_API_URL }}" > .env.production
 
       - name: Build
-        run: pnpm build
+        run: npm run build
 
       - name: Deploy to S3
         run: aws s3 sync dist/ s3://${{ secrets.S3_BUCKET }} --delete
